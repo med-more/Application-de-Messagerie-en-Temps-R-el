@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables
+.env
+.env.*.local
+
+# Build output
+dist/
+build/
+tmp/
+temp/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Optional: MongoDB dump files
+dump/
+
+# Optional: coverage reports (e.g., from testing with Jest)
+coverage/
+
+# Optional: IDE settings
+.idea/
+
+# Optional: pm2 logs
+*.out
+*.err
+
+# Optional: test coverage, cache
+.nyc_output/
+.cache/
