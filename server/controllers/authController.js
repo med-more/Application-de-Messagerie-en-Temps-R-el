@@ -1,10 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
+const User = require('../models/auth');
 
 exports.register = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { name, email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
 
         // Create new user
         const user = new User({
-            username,
+            name,
             email,
             password: hashedPassword
         });
@@ -35,12 +35,11 @@ exports.register = async (req, res) => {
             );
         } catch (tokenError) {
             console.error('Token generation error:', tokenError);
-            // Still return success but without token
             return res.status(201).json({
                 message: 'User registered successfully but token generation failed',
                 user: {
                     id: savedUser._id,
-                    username: savedUser.username,
+                    name: savedUser.name,
                     email: savedUser.email
                 }
             });
@@ -50,7 +49,7 @@ exports.register = async (req, res) => {
             message: 'User registered successfully',
             user: {
                 id: savedUser._id,
-                username: savedUser.username,
+                name: savedUser.name,
                 email: savedUser.email
             },
             token
@@ -95,7 +94,7 @@ exports.login = async (req, res) => {
                 message: 'Login successful but token generation failed',
                 user: {
                     id: user._id,
-                    username: user.username,
+                    name: user.name,
                     email: user.email
                 }
             });
@@ -105,7 +104,7 @@ exports.login = async (req, res) => {
             message: 'Login successful',
             user: {
                 id: user._id,
-                username: user.username,
+                name: user.name,
                 email: user.email
             },
             token
